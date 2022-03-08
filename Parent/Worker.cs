@@ -45,7 +45,7 @@ namespace Parent
                 var s = e.ToString();
                 Console.WriteLine("Stack trace contains {0}line numbers for Child assembly:",
                     s.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
-                        .Single(x => x.Contains("Play()")).Contains("line")
+                        .SingleOrDefault(x => x.Contains("Play()"))?.Contains("line") == true
                         ? ""
                         : "no ");
                 Console.WriteLine($"   {s}");
