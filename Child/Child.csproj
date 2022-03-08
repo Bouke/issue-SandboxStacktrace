@@ -4,15 +4,14 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{54EA61AD-A2A3-4DCE-9DEB-591A969EAEFC}</ProjectGuid>
-        <OutputType>Exe</OutputType>
+        <ProjectGuid>{063FFD47-C382-4A5A-B2C1-96A634332378}</ProjectGuid>
+        <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>SandboxStacktrace</RootNamespace>
-        <AssemblyName>SandboxStacktrace</AssemblyName>
+        <RootNamespace>Child</RootNamespace>
+        <AssemblyName>Child</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
-        <SignAssembly>true</SignAssembly>
-        <AssemblyOriginatorKeyFile>KeyFile.snk</AssemblyOriginatorKeyFile>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,14 +39,8 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Program.cs" />
+        <Compile Include="Child.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="Child\Child.csproj">
-        <Project>{063ffd47-c382-4a5a-b2c1-96a634332378}</Project>
-        <Name>Child</Name>
-      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
