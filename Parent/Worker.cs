@@ -70,6 +70,9 @@ namespace Parent
                 FileIOPermissionAccess.PathDiscovery | FileIOPermissionAccess.Read, Path.GetDirectoryName(childpath))
             );
 
+            // needed for FirstChanceException
+            pset.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
+
             // Identify the folder to use for the sandbox.
             var ads = new AppDomainSetup();
             ads.ApplicationBase = System.IO.Directory.GetCurrentDirectory();
@@ -80,7 +83,20 @@ namespace Parent
             };
 
             // Create the sandboxed application domain.
-            return AppDomain.CreateDomain("Sandbox", hostEvidence, ads, pset, fullTrustAssemblies);
+            var appDomain = AppDomain.CreateDomain("Sandbox", hostEvidence, ads, pset, fullTrustAssemblies);
+            appDomain.FirstChanceException += (sender, args) =>
+            {
+                Console.WriteLine("");
+                Console.WriteLine(
+                    "=====================================");
+                Console.WriteLine(
+                    $"FirstChanceException: {args.Exception.GetType()} {args.Exception.Message}");
+                Console.WriteLine(
+                    "=====================================");
+                Console.WriteLine("");
+            };
+
+            return appDomain;
         }
     }
 }
